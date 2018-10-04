@@ -1,8 +1,15 @@
 language: node_js
 node_js:
-  - '8'
-  - '10'
-script:
-  npm run test-coverage
-after_success:
-  npm run coverage
+- '8'
+- '10'
+script: npm run test-coverage
+after_success: npm run coverage
+deploy:
+  provider: npm
+  email: scaldwell@gmail.com
+  api_key:
+    secure: S6kV+Q82onHUN5uuOp7zOAtxjT+AsY6BIPu5C107e1aILCm4bY/0IRhTCGJotvh8bBBNVVi2rPES6vy0ar06f9mLdDytGypGIw3kKi+QtQbCWH15Zuzb8IxR6TDwkNfHCFc5RLN5ZcJWeF3hrigiqnraqhLkIYt2H6XU9Nwe9qKgQmYsbEfUQa+cvRJbFD80JuXiJ56S4tF6F1jpsFf6gXNEHZQQV+E7cCMZq0XR69dvuJ/PyMinG4Szhr2WXHxnvIQmgMIyqtOm8Ptlp9wdgFAT3EJLXtcp3EbzCx3kEEt8qmY2F3t2fY3hegz3mulwFkb+1Md3blTCWdm+7o/RafdNL+yVKUwl0K9wYYlE9jl8CqvWHfuhiS4pXcnqLWove4raainZdFzbsw8C+CMsQoQIZk0C/qBfaz9od5WaRRJDmxcpTY9tdZiXtTzgykPErafaIzPa4mqZKTu+wBNFbT8R4CmrJexruTasMvWqX5ypkl4bSbzPkQBWH5pRNfPpdYciFyVJw2GvsipTIRgMm9OXXSLmcLKd9Oc9dwxVyEWI6jbEYbmtxle5zLiCHfido8kNg8+MAvEL/GWDNCZoJtQnqxSyTX3RSJ6v+pFmTB0RVD6vQQdPaZOuHHsQixQ2r0dP/czVEa8cBVmY93BpxzeGJOZi6op7sdaPgV6tNyU=
+  on:
+    tags: true
+    repo: stevecaldwell77/hebo-event-repository-dynamodb
+    node: '8'
