@@ -20,7 +20,8 @@
     "Steve Caldwell <scaldwell@gmail.com>"
   ],
   "dependencies": {
-    "@aws/dynamodb-query-iterator": "^0.7.1"
+    "@aws/dynamodb-query-iterator": "^0.7.1",
+    "hebo-validation": "^1.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.0",
@@ -34,7 +35,6 @@
     "eslint-config-xo-lass": "^1.0.3",
     "eslint-plugin-prettier": "^3.0.0",
     "fixpack": "^2.3.1",
-    "hebo": "^0.3.3",
     "husky": "^1.1.1",
     "lint-staged": "^7.3.0",
     "nyc": "^13.0.1",

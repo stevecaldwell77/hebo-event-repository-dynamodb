@@ -3007,15 +3007,13 @@ has@^1.0.1:
   dependencies:
     function-bind "^1.1.1"
 
-hebo@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/hebo/-/hebo-0.3.3.tgz#5cd273779477092a88033fec93b6debd217726e5"
-  integrity sha512-aWb0OS1G1BCO2Fnr0L6gWzm3neppY5eBIqFj/GEHC0Ttdgk8my018APqBRG7IqM/nXUbpJCHigFxHlPhmZ72fQ==
+hebo-validation@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/hebo-validation/-/hebo-validation-1.1.0.tgz#ebb7e368f631c323654952ba1e44baaa8055cae1"
+  integrity sha512-7Yzo7i8P5l91mpLrDnyFjFH2qWdkkXDd0RXrbd5nyL1J6cQ045YJdYv/ejbB89y83SCBBnnTAWY9qUjAzC2taw==
   dependencies:
-    immer "^1.7.2"
-    joi "^13.6.0"
+    joi "^13.7.0"
     lodash "^4.17.11"
-    shortid "^2.2.13"
 
 hoek@5.x.x:
   version "5.0.4"
@@ -3118,11 +3116,6 @@ ignore@^4.0.2, ignore@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
-
-immer@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-1.7.2.tgz#a51e9723c50b27e132f6566facbec1c85fc69547"
-  integrity sha512-4Urocwu9+XLDJw4Tc6ZCg7APVjjLInCFvO4TwGsAYV5zT6YYSor14dsZR0+0tHlDIN92cFUOq+i7fC00G5vTxA==
 
 import-lazy@^2.1.0:
   version "2.1.0"
@@ -3738,7 +3731,7 @@ jmespath@0.15.0:
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
   integrity sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc=
 
-joi@^13.6.0:
+joi@^13.7.0:
   version "13.7.0"
   resolved "https://registry.yarnpkg.com/joi/-/joi-13.7.0.tgz#cfd85ebfe67e8a1900432400b4d03bbd93fb879f"
   integrity sha512-xuY5VkHfeOYK3Hdi91ulocfuFopwgbSORmIwzcwHKESQhC7w1kD5jaVSPnqDxS2I8t3RZ9omCKAxNwXN5zG1/Q==
