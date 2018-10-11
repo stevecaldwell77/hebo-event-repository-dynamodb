@@ -1,14 +1,16 @@
-class Script {
-    constructor(config) {
-        config = { ...config };
-        this._name = config.name || 'script';
+const { validateEvent } = require('hebo/validators');
 
-        this.renderName = this.renderName.bind(this);
+class EventRepositoryDynamodb {
+    constructor({ dynamodbClient, aggregates } = {}) {
+        this.aggregates = aggregates;
+        this.dynamodbClient = dynamodbClient;
     }
 
-    renderName() {
-        return this._name;
+    async getEvents(aggregateName, aggregateId, greaterThanVersion = 0) {
+    }
+
+    async writeEvent(aggregateName, aggregateId, event) {
     }
 }
 
-module.exports = Script;
+module.exports = EventRepositoryDynamodb;
