@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "@aws/dynamodb-query-iterator": "^0.7.1",
-    "hebo-validation": "^1.1.0"
+    "hebo-validation": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.0",
@@ -93,7 +93,7 @@
   },
   "peerDependencies": {
     "aws-sdk": "^2.332.0",
-    "hebo": "^0.3.3"
+    "hebo": "^1.0.0"
   },
   "prettier": {
     "singleQuote": true,
