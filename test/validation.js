@@ -1,6 +1,7 @@
 const test = require('ava');
 const { omit } = require('lodash');
 const shortid = require('shortid');
+const uuid = require('uuid/v4');
 const AWS = require('aws-sdk');
 const EventRepositoryDynamodb = require('..');
 const initDb = require('./helpers/mock-dynamodb');
@@ -151,7 +152,7 @@ test('dynamodb write errors propogated', async t => {
         repo.writeEvent({
             aggregateName: 'book',
             aggregateId: shortid.generate(),
-            eventId: shortid.generate(),
+            eventId: uuid(),
             type: 'AUTHOR_SET',
             metadata: { userId: 1234 },
             payload: { author: 'Fitzgerald' },

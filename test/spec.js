@@ -1,5 +1,6 @@
 const test = require('ava');
 const shortid = require('shortid');
+const uuid = require('uuid/v4');
 const {
     validateEventRepository,
     InvalidEventError,
@@ -23,7 +24,7 @@ const makeRepo = async () => {
 const makeSetAuthorEvent = ({ bookId, sequenceNumber }) => ({
     aggregateName: 'book',
     aggregateId: bookId,
-    eventId: shortid.generate(),
+    eventId: uuid(),
     type: 'AUTHOR_SET',
     metadata: { userId: 1234 },
     payload: { author: 'Fitzgerald' },
@@ -33,7 +34,7 @@ const makeSetAuthorEvent = ({ bookId, sequenceNumber }) => ({
 const makeSetTitleEvent = ({ bookId, sequenceNumber }) => ({
     aggregateName: 'book',
     aggregateId: bookId,
-    eventId: shortid.generate(),
+    eventId: uuid(),
     type: 'TITLE_SET',
     metadata: { userId: 1234 },
     payload: { title: 'The Great Gatsby' },
@@ -43,7 +44,7 @@ const makeSetTitleEvent = ({ bookId, sequenceNumber }) => ({
 const makeSetPublisherEvent = ({ bookId, sequenceNumber }) => ({
     aggregateName: 'book',
     aggregateId: bookId,
-    eventId: shortid.generate(),
+    eventId: uuid(),
     type: 'PUBLISHER_SET',
     metadata: { userId: 1234 },
     payload: { publisherId: shortid.generate() },
@@ -85,7 +86,7 @@ test('writeEvent() - invalid event throws an error', async t => {
         repo.writeEvent({
             aggregateName: 'book',
             aggregateId: bookId,
-            eventId: shortid.generate(),
+            eventId: uuid(),
             metadata: {},
             payload: {},
             sequenceNumber: 1,
