@@ -1,4 +1,36 @@
+/*
+
+To run this test against a live database, do the following:
+
+# Setup Dynamodb Table:
+aws dynamodb create-table \
+    --table-name hebotest_book_event \
+    --attribute-definitions '[
+        { "AttributeName": "bookId", "AttributeType": "S" },
+        { "AttributeName": "sequenceNumber", "AttributeType": "N" }
+    ]' \
+    --key-schema '[
+        { "AttributeName": "bookId", "KeyType": "HASH" },
+        { "AttributeName": "sequenceNumber", "KeyType": "RANGE" }
+    ]' \
+    --provisioned-throughput '{
+        "ReadCapacityUnits": 10,
+        "WriteCapacityUnits": 10
+    }'
+aws dynamodb wait table-exists --table-name hebotest_book_event
+
+# Run Test:
+HEBO_LIVE_DYNAMODB_TEST=1 HEBO_TEST_TABLE=hebotest_book_event \
+  npx ava test/spec.js
+
+# Cleanup Dynamodb Table:
+aws dynamodb delete-table --table-name hebotest_book_event
+aws dynamodb wait table-not-exists --table-name hebotest_book_event
+
+*/
+
 const test = require('ava');
+const AWS = require('aws-sdk');
 const shortid = require('shortid');
 const uuid = require('uuid/v4');
 const {
@@ -8,13 +40,29 @@ const {
 const EventRepositoryDynamodb = require('..');
 const initDb = require('./helpers/mock-dynamodb');
 
+const getLiveDynamodbClient = () => new AWS.DynamoDB();
+
+const getMockDynamodbClient = async () => {
+    const { client } = await initDb();
+    return client;
+};
+
+const getDynamodbClient = process.env.HEBO_LIVE_DYNAMODB_TEST
+    ? getLiveDynamodbClient
+    : getMockDynamodbClient;
+
+const getTableName = () =>
+    process.env.HEBO_LIVE_DYNAMODB_TEST
+        ? process.env.HEBO_TEST_TABLE
+        : 'bookEvent';
+
 const makeRepo = async () => {
-    const { client: dynamodbClient } = await initDb();
+    const dynamodbClient = await getDynamodbClient();
     return new EventRepositoryDynamodb({
         dynamodbClient,
         aggregates: {
             book: {
-                tableName: 'bookEvent',
+                tableName: getTableName(),
                 aggregateIdField: 'bookId',
             },
         },
