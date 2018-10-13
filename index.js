@@ -84,6 +84,7 @@ class EventRepositoryDynamodb {
 
         const params = {
             TableName: this.tableName(aggregateName),
+            ConsistentRead: true,
             KeyConditionExpression: keyExpression,
             ExpressionAttributeNames: attributes.names,
             ExpressionAttributeValues: attributes.values,
