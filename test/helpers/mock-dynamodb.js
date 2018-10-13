@@ -19,6 +19,7 @@ const initDb = memoize(
         const port = await startMockDynamodb();
         const client = new AWS.DynamoDB({
             endpoint: `http://localhost:${port}`,
+            region: 'local',
             accessKeyId: 'xxxxxxxxx',
             secretAccessKey: 'yyyyyyyyy',
         });

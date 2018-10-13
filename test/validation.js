@@ -129,6 +129,7 @@ test('dynamodb write errors propogated', async t => {
     const badPort = dynamodbClientOrig.endpoint.port + 1;
     const dynamodbClient = new AWS.DynamoDB({
         endpoint: `http://localhost:${badPort}`,
+        region: 'local',
         accessKeyId: 'xxxxxxxxx',
         secretAccessKey: 'yyyyyyyyy',
         maxRetries: 0,
