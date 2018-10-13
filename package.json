@@ -1,7 +1,7 @@
 {
   "name": "hebo-event-repository-dynamodb",
   "description": "Event Repository implementation for hebo-js that uses AWS DynamoDb",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Steve Caldwell <scaldwell@gmail.com>",
   "ava": {
     "failFast": true,
