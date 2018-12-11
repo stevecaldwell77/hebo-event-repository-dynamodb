@@ -1,6 +1,7 @@
 const assert = require('assert');
 const { omit, isPlainObject, isString, forEach } = require('lodash');
 const { compose } = require('lodash/fp');
+const autoBind = require('auto-bind');
 const AWS = require('aws-sdk');
 const { QueryIterator } = require('@aws/dynamodb-query-iterator');
 const { ExpressionAttributes } = require('@aws/dynamodb-expressions');
@@ -42,6 +43,7 @@ class EventRepositoryDynamodb {
         this.aggregates = aggregates;
         this.dynamodbClient = dynamodbClient;
         this.documentClient = memoize(this.documentClient.bind(this));
+        autoBind(this);
     }
 
     documentClient() {

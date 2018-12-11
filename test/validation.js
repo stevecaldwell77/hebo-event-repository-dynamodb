@@ -149,8 +149,10 @@ test('dynamodb write errors propogated', async t => {
         },
     });
 
+    const { writeEvent } = repo;
+
     const err = await t.throws(
-        repo.writeEvent({
+        writeEvent({
             aggregateName: 'book',
             aggregateId: shortid.generate(),
             eventId: uuid(),

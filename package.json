@@ -23,6 +23,7 @@
     "@aws/dynamodb-auto-marshaller": "^0.7.1",
     "@aws/dynamodb-expressions": "^0.7.3",
     "@aws/dynamodb-query-iterator": "^0.7.1",
+    "auto-bind": "^1.2.1",
     "hebo-validation": "^3.0.0",
     "lodash": "^4.17.11",
     "memoizee": "^0.4.14"
