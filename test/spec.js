@@ -13,10 +13,7 @@ aws dynamodb create-table \
         { "AttributeName": "bookId", "KeyType": "HASH" },
         { "AttributeName": "sequenceNumber", "KeyType": "RANGE" }
     ]' \
-    --provisioned-throughput '{
-        "ReadCapacityUnits": 10,
-        "WriteCapacityUnits": 10
-    }'
+    --billing-mode PAY_PER_REQUEST
 aws dynamodb wait table-exists --table-name hebotest_book_event
 
 # Run Test:
@@ -224,5 +221,30 @@ test('getEvents() - minimum sequenceNumber', async t => {
         await getEvents('book', bookId, 4),
         [],
         'getEvents() respects minimum sequenceNumber larger than last event',
+    );
+});
+
+test('writeEvent() - metadata can be empty', async t => {
+    const repo = await makeRepo();
+    const { writeEvent, getEvents } = repo;
+    const bookId = shortid.generate();
+
+    const event = {
+        ...makeSetAuthorEvent({ bookId, sequenceNumber: 1 }),
+        metadata: {
+            user: {
+                username: 'foo',
+                groups: {},
+            },
+        },
+    };
+
+    const result = await writeEvent(event);
+    t.true(result, 'writeEvent() returns true with event with empty metadata');
+
+    t.deepEqual(
+        await getEvents('book', bookId),
+        [event],
+        'event returned from storage with empty metadata',
     );
 });
