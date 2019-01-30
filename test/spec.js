@@ -30,6 +30,7 @@ const test = require('ava');
 const AWS = require('aws-sdk');
 const shortid = require('shortid');
 const uuid = require('uuid/v4');
+const { map, omit } = require('lodash/fp');
 const {
     validateEventRepository,
     InvalidEventError,
@@ -65,6 +66,8 @@ const makeRepo = async () => {
         },
     });
 };
+
+const removeTimestamps = map(omit('eventTimestamp'));
 
 const makeSetAuthorEvent = ({ bookId, sequenceNumber }) => ({
     aggregateName: 'book',
@@ -116,8 +119,10 @@ test('writeEvent() - valid event is written', async t => {
     const result2 = await writeEvent(event2);
     t.true(result2, 'writeEvent() returns true with second valid event');
 
+    const writtenEvents = await getEvents('book', bookId);
+
     t.deepEqual(
-        await getEvents('book', bookId),
+        removeTimestamps(writtenEvents),
         [event1, event2],
         'events written by writeEvent() succesfully stored',
     );
@@ -165,8 +170,10 @@ test('writeEvent() - stale sequenceNumber returns false', async t => {
         'writeEvent() returns false for event with stale sequenceNumber',
     );
 
+    const writtenEvents = await getEvents('book', bookId);
+
     t.deepEqual(
-        await getEvents('book', bookId),
+        removeTimestamps(writtenEvents),
         [event1],
         'event with stale sequenceNumber not stored',
     );
@@ -191,8 +198,10 @@ test('getEvents() - no minimum sequenceNumber', async t => {
     await writeEvent(event2);
     await writeEvent(event3);
 
+    const writtenEvents = await getEvents('book', bookId);
+
     t.deepEqual(
-        await getEvents('book', bookId),
+        removeTimestamps(writtenEvents),
         [event1, event2, event3],
         'getEvents() with no minimum sequenceNumber returns all events',
     );
@@ -211,14 +220,16 @@ test('getEvents() - minimum sequenceNumber', async t => {
     await writeEvent(event2);
     await writeEvent(event3);
 
+    const writtenEventsGreaterThan2 = await getEvents('book', bookId, 2);
     t.deepEqual(
-        await getEvents('book', bookId, 2),
+        removeTimestamps(writtenEventsGreaterThan2),
         [event3],
         'getEvents() respects minimum sequenceNumber',
     );
 
+    const writtenEventsGreaterThan4 = await getEvents('book', bookId, 4);
     t.deepEqual(
-        await getEvents('book', bookId, 4),
+        writtenEventsGreaterThan4,
         [],
         'getEvents() respects minimum sequenceNumber larger than last event',
     );
@@ -242,9 +253,36 @@ test('writeEvent() - metadata can be empty', async t => {
     const result = await writeEvent(event);
     t.true(result, 'writeEvent() returns true with event with empty metadata');
 
+    const writtenEvents = await getEvents('book', bookId);
+
     t.deepEqual(
-        await getEvents('book', bookId),
+        removeTimestamps(writtenEvents),
         [event],
         'event returned from storage with empty metadata',
+    );
+});
+
+test('writeEvent() - timestamp added to event', async t => {
+    const startTimestamp = Date.now();
+
+    const repo = await makeRepo();
+    const { writeEvent, getEvents } = repo;
+    const bookId = shortid.generate();
+
+    const event = makeSetAuthorEvent({ bookId, sequenceNumber: 1 });
+
+    const result = await writeEvent(event);
+    t.true(result, 'writeEvent() returns true with valid event');
+
+    const writtenEvents = await getEvents('book', bookId);
+    t.is(writtenEvents.length, 1, 'expected number of events written');
+
+    const writtenTimestamp = writtenEvents[0].eventTimestamp;
+
+    t.truthy(writtenTimestamp, 'event written with eventTimestamp');
+    t.true(
+        writtenTimestamp >= startTimestamp &&
+            writtenTimestamp <= startTimestamp + 2000,
+        'event written with eventTimestamp in expected range',
     );
 });

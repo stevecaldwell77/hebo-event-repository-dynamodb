@@ -137,6 +137,7 @@ class EventRepositoryDynamodb {
             TableName: this.tableName(aggregateName),
             Item: {
                 [aggregateIdField]: aggregateId,
+                eventTimestamp: Date.now(),
                 ...omit(event, ['aggregateName', 'aggregateId']),
             },
             ConditionExpression: `attribute_not_exists(${escapedAggregateId})`,
