@@ -40,7 +40,7 @@
     "eslint-config-archereducation": "^4.3.1",
     "fixpack": "^2.3.1",
     "husky": "^1.1.1",
-    "lint-staged": "^7.3.0",
+    "lint-staged": "^9.4.2",
     "nyc": "^13.0.1",
     "prettier": "^1.18.2",
     "prettier-config-archereducation": "^1.0.0",
@@ -68,20 +68,18 @@
   ],
   "license": "MIT",
   "lint-staged": {
-    "linters": {
-      "*.js": [
-        "yarn lint --fix",
-        "git add"
-      ],
-      "*.md": [
-        "remark . -qfo",
-        "git add"
-      ],
-      "package.json": [
-        "fixpack",
-        "git add"
-      ]
-    }
+    "*.js": [
+      "yarn lint --fix",
+      "git add"
+    ],
+    "*.md": [
+      "remark . -qfo",
+      "git add"
+    ],
+    "package.json": [
+      "fixpack",
+      "git add"
+    ]
   },
   "main": "index.js",
   "nyc": {
