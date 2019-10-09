@@ -102,7 +102,7 @@ const makeSetPublisherEvent = ({ bookId, sequenceNumber }) => ({
 test('passes validator', async t => {
     const repo = await makeRepo();
     const { error } = validateEventRepository(repo);
-    t.is(error, null, 'no error generaged by validation');
+    t.is(error, undefined, 'no error generaged by validation');
 });
 
 test('writeEvent() - valid event is written', async t => {
