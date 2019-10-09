@@ -134,7 +134,7 @@ test('writeEvent() - invalid event throws an error', async t => {
     const bookId = shortid.generate();
 
     // event missing type
-    await t.throws(
+    await t.throwsAsync(
         writeEvent({
             aggregateName: 'book',
             aggregateId: bookId,
