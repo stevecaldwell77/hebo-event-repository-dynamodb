@@ -36,20 +36,14 @@
     "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "dynalite": "^2.0.0",
-    "eslint": "^5.6.1",
-    "eslint-config-prettier": "^3.1.0",
-    "eslint-config-xo-lass": "^1.0.3",
-    "eslint-plugin-prettier": "^3.0.0",
     "fixpack": "^2.3.1",
     "husky": "^1.1.1",
     "lint-staged": "^7.3.0",
     "nyc": "^13.0.1",
-    "prettier": "^1.14.3",
     "remark-cli": "^5.0.0",
     "remark-preset-github": "^0.0.9",
     "shortid": "^2.2.13",
-    "uuid": "^3.3.2",
-    "xo": "^0.23.0"
+    "uuid": "^3.3.2"
   },
   "engines": {
     "node": ">=8.16.1"
@@ -72,8 +66,6 @@
   "lint-staged": {
     "linters": {
       "*.js": [
-        "prettier --write",
-        "xo --fix",
         "git add"
       ],
       "*.md": [
@@ -102,12 +94,6 @@
     "aws-sdk": "^2.332.0",
     "hebo": ">=6.0.0"
   },
-  "prettier": {
-    "singleQuote": true,
-    "bracketSpacing": true,
-    "trailingComma": "all",
-    "tabWidth": 4
-  },
   "remarkConfig": {
     "plugins": [
       "preset-github"
@@ -120,28 +106,9 @@
   "scripts": {
     "ava": "cross-env NODE_ENV=test ava",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "lint": "xo && remark . -qfo",
+    "lint": "remark . -qfo",
     "nyc": "cross-env NODE_ENV=test nyc ava",
     "test": "npm run lint && npm run ava",
     "test-coverage": "npm run lint && npm run nyc"
-  },
-  "xo": {
-    "prettier": true,
-    "space": 4,
-    "extends": [
-      "xo-lass"
-    ],
-    "parserOptions": {
-      "sourceType": "module"
-    },
-    "rules": {
-      "max-len": [
-        "error",
-        {
-          "code": 80,
-          "ignoreUrls": true
-        }
-      ]
-    }
   }
 }
