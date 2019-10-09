@@ -23,31 +23,31 @@
     "@aws/dynamodb-auto-marshaller": "^0.7.1",
     "@aws/dynamodb-expressions": "^0.7.3",
     "@aws/dynamodb-query-iterator": "^0.7.1",
-    "auto-bind": "^1.2.1",
-    "hebo-validation": "^5.0.0",
-    "lodash": "^4.17.11",
+    "auto-bind": "^2.1.1",
+    "hebo-validation": "^6.0.0",
+    "lodash": "^4.17.15",
     "memoizee": "^0.4.14"
   },
   "devDependencies": {
-    "@commitlint/cli": "^7.2.0",
-    "@commitlint/config-conventional": "^7.1.2",
-    "ava": "^0.25.0",
-    "aws-sdk": "^2.332.0",
-    "codecov": "^3.1.0",
-    "cross-env": "^5.2.0",
-    "dynalite": "^2.0.0",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "ava": "^2.4.0",
+    "aws-sdk": "^2.546.0",
+    "codecov": "^3.6.1",
+    "cross-env": "^6.0.3",
+    "dynalite": "^3.0.0",
     "eslint": "^6.5.1",
     "eslint-config-archereducation": "^4.3.1",
     "fixpack": "^2.3.1",
-    "husky": "^1.1.1",
+    "husky": "^3.0.8",
     "lint-staged": "^9.4.2",
-    "nyc": "^13.0.1",
+    "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "prettier-config-archereducation": "^1.0.0",
-    "remark-cli": "^5.0.0",
-    "remark-preset-github": "^0.0.9",
-    "shortid": "^2.2.13",
-    "uuid": "^3.3.2"
+    "remark-cli": "^7.0.0",
+    "remark-preset-github": "^0.0.16",
+    "shortid": "^2.2.15",
+    "uuid": "^3.3.3"
   },
   "engines": {
     "node": ">=8.16.1"
@@ -94,7 +94,7 @@
     ]
   },
   "peerDependencies": {
-    "aws-sdk": "^2.332.0",
+    "aws-sdk": "^2.546.0",
     "hebo": ">=6.0.0"
   },
   "remarkConfig": {
