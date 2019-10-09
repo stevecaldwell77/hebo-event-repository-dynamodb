@@ -150,11 +150,12 @@ class EventRepositoryDynamodb {
                 .put(params)
                 .promise();
             success = true;
-        } catch (err) {
-            if (err.code !== 'ConditionalCheckFailedException') {
-                throw err;
+        } catch (error) {
+            if (error.code !== 'ConditionalCheckFailedException') {
+                throw error;
             }
         }
+
         return success;
     }
 }

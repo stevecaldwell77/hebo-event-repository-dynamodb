@@ -3,8 +3,8 @@ const { omit } = require('lodash');
 const shortid = require('shortid');
 const uuid = require('uuid/v4');
 const AWS = require('aws-sdk');
-const EventRepositoryDynamodb = require('..');
 const initDb = require('./helpers/mock-dynamodb');
+const EventRepositoryDynamodb = require('..');
 
 test('constructor validation', async t => {
     const { client: dynamodbClient } = await initDb();

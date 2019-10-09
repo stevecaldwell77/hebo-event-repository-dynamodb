@@ -35,8 +35,8 @@ const {
     validateEventRepository,
     InvalidEventError,
 } = require('hebo-validation');
-const EventRepositoryDynamodb = require('..');
 const initDb = require('./helpers/mock-dynamodb');
+const EventRepositoryDynamodb = require('..');
 
 const getLiveDynamodbClient = () => new AWS.DynamoDB();
 
